@@ -5,6 +5,9 @@
     <title>Dashboard</title>
 </head>
 <body>
-    <p th:text="'Time on the Server is' + ${theDate}"></p>
+<!--    <p th:text="'Time on the Server is' + ${theDate}"></p>-->
+<ul th:each="recipe: ${recipes}">
+    <li th:text="${recipe.name}">Nama Resep</li>
+</ul>
 </body>
 </html>

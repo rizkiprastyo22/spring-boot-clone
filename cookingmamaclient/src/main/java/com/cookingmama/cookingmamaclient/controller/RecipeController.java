@@ -1,5 +1,7 @@
 package com.cookingmama.cookingmamaclient.controller;
 
+import com.cookingmama.cookingmamaclient.service.impl.RecipeServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.web.servlet.error.ErrorMvcAutoConfiguration;
 import org.springframework.stereotype.Controller;
@@ -10,10 +12,16 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class RecipeController {
 
+    @Autowired
+    private RecipeServiceImpl service;
+
     // control content di path home
     @GetMapping("/home")
     public String home(Model model){
-        model.addAttribute("theDate", new java.util.Date());
+//        model.addAttribute("theDate", new java.util.Date());
+        model.addAttribute("recipes", service.findAll());
         return "home";
     }
+
+
 }
