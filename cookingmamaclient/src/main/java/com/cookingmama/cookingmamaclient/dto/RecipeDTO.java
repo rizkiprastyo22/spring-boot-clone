@@ -10,7 +10,7 @@ import javax.persistence.Id;
 @Setter
 @Data
 
-public class Recipe {
+public class RecipeDTO {
 
     // inisialisasi data untuk menampung api
     @Id
