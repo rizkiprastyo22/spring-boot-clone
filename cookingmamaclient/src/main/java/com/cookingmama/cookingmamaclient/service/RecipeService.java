@@ -14,26 +14,33 @@ import java.util.stream.Collectors;
 public class RecipeService {
 
     // ambil api semua resep
-    @Value("http://localhost:8080/api/recipe/recipes")
+    @Value("${resource.recipes}")
     private String resource;
 
     // ambil api resep by Id
-    @Value("http://localhost:8080/api/recipe/{id}")
+    @Value("${resource.getId}/{id}")
     private String idResource;
+
+    // ambil api create resep
+    @Value("${resource.create}")
+    private String createResource;
 
     @Autowired
     private RestTemplate restTemplate;
 
-    // implementasi dari penampungan data semua resep
+    // pemrosesan dari data yang ditampung di penampungan data semua resep
     public List<RecipeDTO>findAll(){
         System.out.println(Arrays.stream(restTemplate.getForObject(resource, RecipeDTO[].class)).collect(Collectors.toList()));
         return Arrays.stream(restTemplate.getForObject(resource, RecipeDTO[].class)).collect(Collectors.toList());
     }
 
-    // implementasi dari penampungan data resep by Id
+    // pemrosesan dari data yang ditampung di penampungan data resep by Id
     public RecipeDTO getDetail(Long id){
         return restTemplate.getForObject(idResource, RecipeDTO.class,id);
     }
 
     // implementasi dari pembuatan resep baru
+    public RecipeDTO createRecipe(RecipeDTO recipe){
+        return restTemplate.postForObject(createResource, recipe, RecipeDTO.class);
+    }
 }

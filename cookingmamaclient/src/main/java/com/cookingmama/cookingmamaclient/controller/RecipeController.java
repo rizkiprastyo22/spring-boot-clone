@@ -1,5 +1,6 @@
 package com.cookingmama.cookingmamaclient.controller;
 
+import com.cookingmama.cookingmamaclient.dto.RecipeDTO;
 import com.cookingmama.cookingmamaclient.service.RecipeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -7,8 +8,11 @@ import org.springframework.boot.autoconfigure.web.servlet.error.ErrorMvcAutoConf
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.client.RestTemplate;
 
 @SpringBootApplication(exclude = {ErrorMvcAutoConfiguration.class})
@@ -31,6 +35,13 @@ public class RecipeController {
     public String getRecipesId (@PathVariable Long id, String name, Model model){
         model.addAttribute("detail", service.getDetail(id));
         return "detailRecipe";
+    }
+
+    // control content di createRecipe
+    @PostMapping(value = "/createRecipe")
+    public String createRecipe(@Validated @ModelAttribute("newRecipe") RecipeDTO recipe){
+        service.createRecipe(recipe);
+        return "redirect:/home";
     }
 
     @Bean
