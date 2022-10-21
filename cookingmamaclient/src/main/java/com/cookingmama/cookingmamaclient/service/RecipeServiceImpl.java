@@ -1,4 +1,4 @@
-package com.cookingmama.cookingmamaclient.service.impl;
+package com.cookingmama.cookingmamaclient.service;
 
 import com.cookingmama.cookingmamaclient.dto.Recipe;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,12 +17,21 @@ public class RecipeServiceImpl {
     @Value("http://localhost:8080/api/recipe/recipes")
     private String resource;
 
+    // ambil api resep by Id
+    @Value("http://localhost:8080/api/recipe/{id}")
+    private String idResource;
+
     @Autowired
     private RestTemplate restTemplate;
 
-    // implementasi dari penampungan data
+    // implementasi dari penampungan data semua resep
     public List<Recipe>findAll(){
         System.out.println(Arrays.stream(restTemplate.getForObject(resource, Recipe[].class)).collect(Collectors.toList()));
         return Arrays.stream(restTemplate.getForObject(resource, Recipe[].class)).collect(Collectors.toList());
+    }
+
+    // implementasi dari penampungan data resep by Id
+    public Recipe getDetail(Long id){
+        return restTemplate.getForObject(idResource, Recipe.class,id);
     }
 }
