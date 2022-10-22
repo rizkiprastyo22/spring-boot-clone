@@ -2,6 +2,7 @@ package com.cookingmama.cookingmamaclient.controller;
 
 import com.cookingmama.cookingmamaclient.dto.RecipeDTO;
 import com.cookingmama.cookingmamaclient.service.RecipeService;
+import org.bouncycastle.math.raw.Mod;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.web.servlet.error.ErrorMvcAutoConfiguration;
@@ -31,7 +32,7 @@ public class RecipeController {
 
     // control content di path detail
     @GetMapping("/detailRecipe/{id}")
-    public String getRecipesId (@PathVariable Long id, String name, Model model){
+    public String getRecipesId (@PathVariable Long id, Model model){
         model.addAttribute("detailRecipe", service.getDetailRecipe(id));
         return "detailRecipe";
     }
@@ -49,6 +50,12 @@ public class RecipeController {
     public String createRecipe(@Validated @ModelAttribute("newRecipe") RecipeDTO recipe){
         service.createRecipe(recipe);
         return "redirect:/home";
+    }
+
+    @GetMapping(value = "/editRecipe/{id}")
+    public String editRecipe(@PathVariable Long id, Model model){
+        model.addAttribute("editRecipe", service.getDetailRecipe(id));
+        return "editRecipe";
     }
 
     @Bean

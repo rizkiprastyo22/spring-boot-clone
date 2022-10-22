@@ -1,24 +1,24 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Add New Recipe</title>
+    <title>Edit Resep</title>
 </head>
 <body>
 
     <!--Add new recipe-->
-    <form th:method="POST" th:action="@{/createRecipe/save}" th:object="${newRecipe}" name="createRecipe">
+    <form th:method="GET" th:object="${editRecipe}" name="editRecipe">
         <div>
             <label>Nama Resep: </label>
-            <input type="text" th:field="*{name}">
+            <input type="text" th:value="*{name}">
         </div>
         <div>
             <label>Bahan-bahan yang diperlukan: </label>
-            <input type="text" th:field="*{ingredients}">
+            <input type="text" th:value="*{ingredients}">
         </div>
         <div>
             <label>Cara memasak: </label>
-            <input type="text" th:field="*{howto}">
+            <input type="text" th:value="*{howto}">
         </div>
         <div>
             <label for="inputPublik">Bisa dilihat oleh publik? </label>
@@ -33,10 +33,10 @@
         </div>
         <div>
             <label for="inputUserId">User ID: </label>
-            <input type="text" name="userId" id="inputUserId" th:field="*{userid}">
+            <input type="text" name="userId" id="inputUserId" th:value="*{userid}">
         </div>
         <button type="submit" onclick="window.location.href='/home'">Simpan</button>
-        <a th:href="@{/home}">Kembali ke Beranda</a>
+        <a th:href="@{/detailRecipe/}+${editRecipe.id}">Kembali ke resep</a>
     </form>
 
 </body>

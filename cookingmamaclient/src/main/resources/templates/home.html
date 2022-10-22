@@ -2,12 +2,17 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Dashboard</title>
+    <title>Beranda</title>
 </head>
 <body>
-<!--    <p th:text="'Time on the Server is' + ${theDate}"></p>-->
-<ul th:each="recipe: ${recipes}">
-    <li th:text="${recipe.name}">Nama Resep</li>
-</ul>
+
+    <!--Buat Resep Baru-->
+    <a th:href="@{/createRecipe}">Buat resep baru</a>
+
+    <!--    <p th:text="'Time on the Server is' + ${theDate}"></p>-->
+    <ul th:each="recipe: ${recipes}">
+        <li th:text="${recipe.name}">Nama Resep</li>
+        <a th:href="@{/detailRecipe/}+${recipe.id}">Lihat Resep</a>
+    </ul>
 </body>
 </html>

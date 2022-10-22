@@ -2,10 +2,17 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Detail Resep</title>
+    <title>Lihat Resep</title>
 </head>
 <body>
-  <b><p>Judul Resep:</p></b>
-  <p th:text="${detailRecipe.name}">Judul Resep</p>
+<b><p>Judul Resep:</p></b>
+    <p th:text="${detailRecipe.name}">Nama Resep</p>
+    <b><p>Bahan bahan:</p></b>
+    <p th:text="${detailRecipe.ingredients}">Bahan yang digunakan</p>
+    <b><p>Cara memasak:</p></b>
+    <p th:text="${detailRecipe.howto}">Cara memasak resep</p>
+    <a th:href="@{/editRecipe/}+${detailRecipe.id}">Edit Resep</a>
+    <!--    <a th:href="@{/deleteRecipe/}+${detailRecipe.id}">Hapus Resep</a>-->
+    <a th:href="@{/home}">Kembali ke Beranda</a>
 </body>
 </html>
