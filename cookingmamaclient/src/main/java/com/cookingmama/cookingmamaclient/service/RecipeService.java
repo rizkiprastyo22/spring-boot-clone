@@ -29,13 +29,13 @@ public class RecipeService {
     private RestTemplate restTemplate;
 
     // pemrosesan dari data yang ditampung di penampungan data semua resep
-    public List<RecipeDTO>findAll(){
+    public List<RecipeDTO>getAllRecipes(){
         System.out.println(Arrays.stream(restTemplate.getForObject(resource, RecipeDTO[].class)).collect(Collectors.toList()));
         return Arrays.stream(restTemplate.getForObject(resource, RecipeDTO[].class)).collect(Collectors.toList());
     }
 
     // pemrosesan dari data yang ditampung di penampungan data resep by Id
-    public RecipeDTO getDetail(Long id){
+    public RecipeDTO getDetailRecipe(Long id){
         return restTemplate.getForObject(idResource, RecipeDTO.class,id);
     }
 

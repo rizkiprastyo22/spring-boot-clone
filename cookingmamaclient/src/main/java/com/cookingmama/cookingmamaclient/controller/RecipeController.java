@@ -25,19 +25,27 @@ public class RecipeController {
     @GetMapping("/home")
     public String home(Model model){
 //        model.addAttribute("theDate", new java.util.Date());
-        model.addAttribute("recipes", service.findAll());
+        model.addAttribute("recipes", service.getAllRecipes());
         return "home";
     }
 
     // control content di path detail
-    @GetMapping("/detail/{id}")
+    @GetMapping("/detailRecipe/{id}")
     public String getRecipesId (@PathVariable Long id, String name, Model model){
-        model.addAttribute("detail", service.getDetail(id));
+        model.addAttribute("detailRecipe", service.getDetailRecipe(id));
         return "detailRecipe";
     }
 
-    // control content di createRecipe
-    @PostMapping(value = "/createRecipe")
+    // pindah ke halaman membuat resep baru
+    @GetMapping("/createRecipe")
+    public String newRecipe(Model model){
+        model.addAttribute("newRecipe", new RecipeDTO());
+        return "createRecipe";
+    }
+
+
+    // post hasil resep baru
+    @PostMapping(value = "/createRecipe/save")
     public String createRecipe(@Validated @ModelAttribute("newRecipe") RecipeDTO recipe){
         service.createRecipe(recipe);
         return "redirect:/home";
