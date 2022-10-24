@@ -2,7 +2,6 @@ package com.cookingmama.cookingmamaclient.controller;
 
 import com.cookingmama.cookingmamaclient.dto.RecipeDTO;
 import com.cookingmama.cookingmamaclient.service.RecipeService;
-import org.bouncycastle.math.raw.Mod;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.web.servlet.error.ErrorMvcAutoConfiguration;
@@ -52,10 +51,18 @@ public class RecipeController {
         return "redirect:/home";
     }
 
+    // ambil data resep yang diedit
     @GetMapping(value = "/editRecipe/{id}")
     public String editRecipe(@PathVariable Long id, Model model){
         model.addAttribute("editRecipe", service.getDetailRecipe(id));
         return "editRecipe";
+    }
+
+    // kirim data hasil edit
+    @PostMapping(value = "/editRecipe/{id}/save")
+    public String updateRecipe(@Validated @ModelAttribute("editRecipe") RecipeDTO recipe){
+        service.editRecipe(recipe.getId(), recipe);
+        return "redirect:/home";
     }
 
     @Bean

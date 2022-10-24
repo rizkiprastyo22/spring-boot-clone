@@ -7,18 +7,22 @@
 <body>
 
     <!--Add new recipe-->
-    <form th:method="GET" th:object="${editRecipe}" name="editRecipe">
+    <form th:method="POST" th:action="@{/editRecipe/}+${editRecipe.id}+@{/save}" th:object="${editRecipe}" name="editRecipe">
+        <div>
+            <label>Id Resep: </label>
+            <input type="text" th:field="*{id}" readonly>
+        </div>
         <div>
             <label>Nama Resep: </label>
-            <input type="text" th:value="*{name}">
+            <input type="text" th:field="*{name}">
         </div>
         <div>
             <label>Bahan-bahan yang diperlukan: </label>
-            <input type="text" th:value="*{ingredients}">
+            <input type="text" th:field="*{ingredients}">
         </div>
         <div>
             <label>Cara memasak: </label>
-            <input type="text" th:value="*{howto}">
+            <input type="text" th:field="*{howto}">
         </div>
         <div>
             <label for="inputPublik">Bisa dilihat oleh publik? </label>
@@ -33,7 +37,7 @@
         </div>
         <div>
             <label for="inputUserId">User ID: </label>
-            <input type="text" name="userId" id="inputUserId" th:value="*{userid}">
+            <input type="text" name="userId" id="inputUserId" th:field="*{userid}">
         </div>
         <button type="submit" onclick="window.location.href='/home'">Simpan</button>
         <a th:href="@{/detailRecipe/}+${editRecipe.id}">Kembali ke resep</a>

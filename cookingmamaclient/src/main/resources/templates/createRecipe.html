@@ -32,8 +32,8 @@
             </div>
         </div>
         <div>
-            <label for="inputUserId">User ID: </label>
-            <input type="text" name="userId" id="inputUserId" th:field="*{userid}">
+            <label>User ID: </label>
+            <input type="text" th:field="*{userid}">
         </div>
         <button type="submit" onclick="window.location.href='/home'">Simpan</button>
         <a th:href="@{/home}">Kembali ke Beranda</a>

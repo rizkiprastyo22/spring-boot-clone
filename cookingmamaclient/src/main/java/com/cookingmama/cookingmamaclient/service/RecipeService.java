@@ -25,6 +25,10 @@ public class RecipeService {
     @Value("${resource.create}")
     private String createResource;
 
+    // ambil api update untuk edit
+    @Value("${resource.edit}")
+    private String editResource;
+
     @Autowired
     private RestTemplate restTemplate;
 
@@ -42,5 +46,9 @@ public class RecipeService {
     // implementasi dari pembuatan resep baru
     public RecipeDTO createRecipe(RecipeDTO recipe){
         return restTemplate.postForObject(createResource, recipe, RecipeDTO.class);
+    }
+
+    public RecipeDTO editRecipe(Long id, RecipeDTO recipe){
+        return restTemplate.postForObject(editResource+"/"+id, recipe, RecipeDTO.class);
     }
 }
